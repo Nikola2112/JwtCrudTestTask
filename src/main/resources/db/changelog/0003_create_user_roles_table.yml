@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: nick
+      changes:
+        - createTable:
+            tableName: house_tenants
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: house_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+
+        - addForeignKeyConstraint:
+            baseTableName: house_tenants
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_house_tenants_user
+
+        - addForeignKeyConstraint:
+            baseTableName: house_tenants
+            baseColumnNames: house_id
+            referencedTableName: house
+            referencedColumnNames: id
+            constraintName: fk_house_tenants_house
